@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.brixtal.heroes.jpa.Hero;
 import br.com.brixtal.heroes.jpa.Power;
+import br.com.brixtal.heroes.repository.HeroRepository;
 import br.com.brixtal.heroes.repository.PowerRepository;
 
 @RestController
@@ -15,10 +17,10 @@ import br.com.brixtal.heroes.repository.PowerRepository;
 public class HeroController {
 
 	@Autowired
-	private PowerRepository powerRepository;
+	private HeroRepository heroRepository;
 
-	@GetMapping("/power")
-	public List<Power> getAllEmployees() {
-		return powerRepository.findAll();
+	@GetMapping("/")
+	public List<Hero> getAllEmployees() {
+		return heroRepository.findAll();
 	}
 }

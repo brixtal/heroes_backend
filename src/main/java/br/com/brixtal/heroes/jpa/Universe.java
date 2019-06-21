@@ -14,15 +14,15 @@ import javax.persistence.Table;
 @Table(name ="universe")
 public class Universe implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="id_universe")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	protected Long id;
 	
 	@Column(name="tx_description")
-	private String description;
+	protected String description;
 
 	public Long getId() {
 		return id;
