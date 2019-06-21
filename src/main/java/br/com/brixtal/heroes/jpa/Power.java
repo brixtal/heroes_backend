@@ -14,12 +14,14 @@ import javax.persistence.Table;
 @Table(name ="power")
 public class Power implements Serializable {
 	
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
+	@Column(name="id_power")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
+	@Column(name="tx_description")
 	private String description;
 
 	public Long getId() {
