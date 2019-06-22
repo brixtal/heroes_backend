@@ -27,8 +27,19 @@ public class HeroController {
 	private HeroRepository heroRepository;
 
 	@GetMapping("/")
-	public List<Hero> getAllEmployees() {
-		return heroRepository.findAll();
+	public List<Hero> getAllHeroes(HttpServletResponse response) {
+		try {
+			List<Hero> result = heroRepository.findAllActiveHeroes();
+			if (result.size() > 0) {
+				return result;
+			}
+			// ELSE
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "There is no active hero registred in our DB.",
+					new Exception("No active hero found."));
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+					"An internal error occurred during your request.", e);
+		}
 	}
 
 	@PostMapping("/")
