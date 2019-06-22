@@ -50,9 +50,22 @@ public class HeroController {
 	@DeleteMapping("/{id}")
 	public void deleteHero(@PathVariable Long id) {
 		Optional<Hero> searchHeroToBeRemoved = heroRepository.findById(id);
-		Optional<Object> heroToBeRemoved = searchHeroToBeRemoved.map(hero -> {
-			hero.setActive(false);
-			return heroRepository.save(hero);
+
+		// If not found
+		if (searchHeroToBeRemoved.orElse(null) == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no active hero with ID " + id,
+					new Exception("No active hero found."));
+		}
+
+		searchHeroToBeRemoved.ifPresent(heroToBeRemoved -> {
+			if (heroToBeRemoved.getActive()) {
+				heroToBeRemoved.setActive(false);
+				heroRepository.save(heroToBeRemoved);
+				return;
+			} else {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no active hero with ID " + id,
+						new Exception("No active hero found."));
+			}
 		});
 	}
 }
