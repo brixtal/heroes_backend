@@ -33,7 +33,7 @@ public class Hero implements Serializable {
 
 	@Column(name = "ts_created_at")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
-	protected Date criatedAt;
+	protected Date createdAt;
 
 	@ManyToMany
 	@JoinTable(name = "hero_power", joinColumns = { @JoinColumn(name = "fk_hero") }, inverseJoinColumns = {
@@ -63,12 +63,12 @@ public class Hero implements Serializable {
 		this.name = name;
 	}
 
-	public Date getCriatedAt() {
-		return criatedAt;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setCriatedAt(Date criatedAt) {
-		this.criatedAt = criatedAt;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public List<Power> getPowerList() {
