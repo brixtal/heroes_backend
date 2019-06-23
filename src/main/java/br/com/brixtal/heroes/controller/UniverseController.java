@@ -18,7 +18,33 @@ public class UniverseController {
 	private UniverseRepository universeRepository;
 	
 	@GetMapping("/")
-    public List<Universe> getAllEmployees() {
-        return universeRepository.findAll();
+    public List<Universe> getAllUniverses() {		
+        List<Universe> result = universeRepository.findAll();
+        
+        if(result.size() == 0) {
+        	insertUniverses();
+        	result = universeRepository.findAll();
+        }
+        
+        return result;
     }
+	
+	public void insertUniverses() {
+		Universe u = new Universe();
+		
+		u.setId(1L);
+		u.setDescription("EY Comics");
+		
+		universeRepository.save(u);
+		
+		u.setId(2L);
+		u.setDescription("Trainee Comics");
+		
+		universeRepository.save(u);
+		
+		u.setId(3L);
+		u.setDescription("Outros");
+		
+		universeRepository.save(u);
+	}
 }
